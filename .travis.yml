@@ -8,10 +8,20 @@ before_install:
 script:
     - docker run -e CI=true catchsagar/multi-docker-client-test npm test
 
-# after_success:
-#     - docker build -t catchsagar/multi-docker-nginx ./nginx
-#     - docker build -t catchsagar/multi-docker-client ./client
-#     - docker build -t catchsagar/multi-docker-server ./server
-#     - docker build -t catchsagar/multi-docker-worker ./worker
+after_success:
+    - docker build -t catchsagar/multi-docker-nginx ./nginx
+    - docker build -t catchsagar/multi-docker-client ./client
+    - docker build -t catchsagar/multi-docker-server ./server
+    - docker build -t catchsagar/multi-docker-worker ./worker
+    #Log in to the Docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    #Push the images to Docker Hub
+    - docker push catchsagar/multi-docker-nginx
+    - docker push catchsagar/multi-docker-client
+    - docker push catchsagar/multi-docker-server
+    - docker push catchsagar/multi-docker-worker
+
+
+
 
 
