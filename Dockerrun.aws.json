@@ -24,7 +24,7 @@
         },
         {
             "name": "nginx",
-            "image": "catchsagar/multi-docker-client",
+            "image": "catchsagar/multi-docker-nginxt",
             "hostname": "client",
             "essential": true,
             "memory": 128,
